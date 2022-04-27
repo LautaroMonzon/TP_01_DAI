@@ -2,7 +2,7 @@ import sql from 'mssql'
 import config from '../../db.js'
 import 'dotenv/config'
 
-const Tablapersonaje = process.env.DB_TABLA_personaje;
+const Tablapersonaje = process.env.Tablapersonaje;
 
 export class personajeService {
 
