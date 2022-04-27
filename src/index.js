@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { personajeService } from '../services/personajeService.js';
+import { personajeService } from '../services/personajeServices.js';
 
 const router = Router();
-const personajeService = new PersonajeService();
+const personajeService = new personajeService();
 
 router.get('', async (req, res) => {
   console.log(`This is a get operation`);
