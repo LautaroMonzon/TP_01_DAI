@@ -2,11 +2,11 @@ import sql from 'mssql'
 import config from '../../db.js'
 import 'dotenv/config'
 
-const Tablapersonaje = process.env.Tablapersonaje;
+const Tablapersonaje = process.env.TablapersonajeBd;
 
 export class personajeService {
 
-    getPersonaje = async () => {
+    getPersonajes = async () => {
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
