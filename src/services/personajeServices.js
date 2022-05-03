@@ -11,7 +11,7 @@ export class personajeService {
 
         const pool = await sql.connect(config);
         const response = await pool.request().query(`SELECT * from ${Tablapersonaje}`);
-        console.log(response)
+        console.log(response);
 
         return response.recordset;
     }
