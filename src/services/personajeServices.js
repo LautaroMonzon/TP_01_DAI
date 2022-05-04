@@ -33,12 +33,13 @@ export class personajeService {
 
         const pool = await sql.connect(config);
         const response = await pool.request()
-            .input('nombre',sql.NChar, personaje?.nombre ?? '')
-            .input('peso',sql.Bit, personaje?.peso ?? false)
-            .input('imagen',sql.NChar, personaje?.imagen ?? 0)
+        .input('id',sql.Int, personaje?.peso ?? 0)
+        .input('nombre',sql.NChar, personaje?.nombre ?? '')
+            .input('peso',sql.Int, personaje?.peso ?? 0)
+            .input('imagen',sql.NChar, personaje?.imagen ?? '')
             .input('historia',sql.NChar, personaje?.historia ?? '')
-            .input('edad',sql.Bit, personaje?.edad ?? false)
-            .query(`INSERT INTO ${Tablapersonaje}(nombre, peso, imagen, historia, edad) VALUES (@nombre, @peso, @imagen, @historia, @edad)`);
+            .input('edad',sql.Int, personaje?.edad ?? 0)
+            .query(`INSERT INTO ${Tablapersonaje}(id,nombre, peso, imagen, historia, edad) VALUES (@Id,@nombre, @peso, @imagen, @historia, @edad)`);
         console.log(response)
 
         return response.recordset;

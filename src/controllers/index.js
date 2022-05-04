@@ -16,7 +16,7 @@ router.get('/:id', async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a get operation`);
 
-  const personaje = await PersonajeServices.getpersonajeById(req.params.id);
+  const personaje = await PersonajeServices.getPersonajeById(req.params.id);
 
   return res.status(200).json(personaje);
 });
@@ -24,7 +24,7 @@ router.get('/:id', async (req, res) => {
 router.post('', async (req, res) => {
   console.log(`This is a post operation`);
 
-  const personaje = await PersonajeServices.createpersonaje(req.body);
+  const personaje = await PersonajeServices.createPersonaje(req.body);
 
   return res.status(201).json(personaje);
 });
