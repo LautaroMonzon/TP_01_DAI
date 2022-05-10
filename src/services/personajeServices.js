@@ -50,13 +50,15 @@ export class personajeService {
 
         const pool = await sql.connect(config);
         const response = await pool.request()
-            .input('id',sql.Int, id)
+        console.log(id, personaje)
+        .input('id',sql.Int, personaje?.id ?? 0)    
+        //.input('id',sql.Int, id ?? 0)
             .input('nombre',sql.NChar, personaje?.nombre ?? '')
             .input('peso',sql.Bit, personaje?.peso ?? false)
-            .input('imagen',sql.NChar, personaje?.imagen ?? 0)
+            .input('imagen',sql.NChar, personaje?.imagen ?? '')
             .input('historia',sql.NChar, personaje?.description ?? '')
             .input('edad',sql.Bit, personaje?.edad ?? false)
-            .query(`UPDATE personajes SET nombre = @nombre, peso = @peso, imagen = @imagen, historia = @historia WHERE id = @Id`);
+            .query(`UPDATE Tablapersonaje SET nombre = @nombre, peso = @peso, imagen = @imagen, historia = @historia WHERE id = @id`);
         console.log(response)
 
         return response.recordset;
