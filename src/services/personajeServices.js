@@ -93,4 +93,22 @@ export class personajeService {
 
         return response.recordset;
     }
+
+
+
+    getPersonajeByFilter = async (nombre, edad, peso) => {
+
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+            .query(`SELECT * from ${Tablapersonaje} where nombre = ${nombre}`)
+            .query(`SELECT * from ${Tablapersonaje} where edad = ${edad}`)
+            .query(`SELECT * from ${Tablapersonaje} where peso = ${peso}`);
+
+        console.log(response)
+
+        return response.recordset;
+    }
+
+
+
 }
