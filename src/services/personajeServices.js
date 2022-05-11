@@ -45,14 +45,14 @@ export class personajeService {
         return response.recordset;
     }
 
-    updatePersonajeById = async (id, personaje) => {
+    /*updatePersonajeById = async (id, personaje) => {
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
         const response = await pool.request()
         console.log(id, personaje)
-        .input('id',sql.Int, personaje?.id ?? 0)    
-        //.input('id',sql.Int, id ?? 0)
+          
+            .input('id',sql.Int, id ?? 0)
             .input('nombre',sql.NChar, personaje?.nombre ?? '')
             .input('peso',sql.Bit, personaje?.peso ?? false)
             .input('imagen',sql.NChar, personaje?.imagen ?? '')
@@ -63,6 +63,24 @@ export class personajeService {
 
         return response.recordset;
     }
+    */
+
+   updatePersonaje = async (personaje) => {
+    console.log('This is a function on the service');
+
+    const pool = await sql.connect(config);
+    const response = await pool.request()
+    .input('id',sql.Int, personaje?.peso ?? 0)
+    .input('nombre',sql.NChar, personaje?.nombre ?? '')
+        .input('peso',sql.Int, personaje?.peso ?? 0)
+        .input('imagen',sql.NChar, personaje?.imagen ?? '')
+        .input('historia',sql.NChar, personaje?.historia ?? '')
+        .input('edad',sql.Int, personaje?.edad ?? 0)
+        .query(`UPDATE Tablapersonaje SET nombre = @nombre, peso = @peso, imagen = @imagen, historia = @historia WHERE id = @id`);
+    console.log(response)
+
+    return response.recordset;
+}
 
     deletePersonajeById = async (id) => {
         console.log('This is a function on the service');
