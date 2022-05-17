@@ -108,7 +108,12 @@ export class personajeService {
 
         return response.recordset;
     }
+    
+    
+    getSigned = async() => {
 
+        
+    };
 
 
 }
