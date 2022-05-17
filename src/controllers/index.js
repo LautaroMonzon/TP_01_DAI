@@ -11,6 +11,8 @@ router.get('/', async (req, res) => {
   edad = req.query.edad ?? '';
   peso = req.query.peso ?? '';
 
+
+
   const personaje = await PersonajeServices.getPersonajes();
   personaje = await PersonajeServices.getPersonajesByFilter(nombre,edad,peso);
 

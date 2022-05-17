@@ -95,7 +95,7 @@ export class personajeService {
     }
 
 
-
+//basarse en el get all y desp dentro poner los filtros
     getPersonajeByFilter = async (nombre, edad, peso) => {
 
         const pool = await sql.connect(config);
