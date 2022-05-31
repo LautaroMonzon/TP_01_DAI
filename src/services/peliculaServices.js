@@ -31,14 +31,15 @@ export class peliculaService {
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
+        console.log(pelicula?.fechaDeCreacion)
+        console.log(pelicula)
         const response = await pool.request()
-        .input('id',sql.Int, pelicula?.Id ?? 0)
-        .input('titulo',sql.NChar, pelicula?.nombre ?? '')
+        .input('titulo',sql.NChar, pelicula?.titulo ?? '')
             .input('Imagen',sql.NChar, pelicula?.Imagen ?? '')
-            .input('Fechadecreación',sql.Date, pelicula?.Fechadecreación ?? '')
+            .input('Fechadecreación',sql.Date, pelicula?.fechaDeCreacion ?? '')
             .input('Calificación',sql.Int, pelicula?.Calificación ?? 0)
             .input('PersonajesAsociados',sql.NChar, pelicula?.PersonajesAsociados ?? '')
-            .query(`INSERT INTO ${PeliculaoSerie}(Id,titulo, Imagen, Fechadecreación, Clasificación, PersonajesAsociados) VALUES (@Id,@titulo, @Imagen, @Fechadecreación, @Clasificación, @PersonajesAsociados)`);
+            .query(`INSERT INTO ${PeliculaoSerie}(titulo, Imagen, Fechadecreacion, Clasificación, PersonajesAsociados) VALUES (@titulo, @Imagen, @Fechadecreación, @Calificación, @PersonajesAsociados)`);
         console.log(response)
 
         return response.recordset;

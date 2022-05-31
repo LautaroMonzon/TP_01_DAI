@@ -4,5 +4,5 @@ export class pelicula {
     titulo;
     fechaDeCreacion;
     calificacion;
-    personajesAsociados;
+    PersonajesAsociados;
 }

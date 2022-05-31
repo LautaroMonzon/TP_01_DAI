@@ -34,7 +34,6 @@ export class personajeService {
 
         const pool = await sql.connect(config);
         const response = await pool.request()
-        .input('id',sql.Int, personaje?.peso ?? 0)
         .input('nombre',sql.NChar, personaje?.nombre ?? '')
             .input('peso',sql.Int, personaje?.peso ?? 0)
             .input('imagen',sql.NChar, personaje?.imagen ?? '')
