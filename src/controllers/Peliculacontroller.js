@@ -1,18 +1,34 @@
 import { Router } from 'express';
-import { personajeService } from '../services/personajeServices.js';
+import { peliculaService } from '../services/peliculaServices.js';
 
 const router = Router();
-const PersonajeServices = new personajeService();
+const PeliculaServices = new peliculaService();
+
+
+router.get('/', async (req, res) => {
+    console.log(`This is a get operation`);
+    const pelicula = await PeliculaServices.getPeliculas();
+    return res.status(200).json(pelicula);
+  });
+
+  router.get('/:id', async (req, res) => {
+    console.log(`Request URL Param: ${req.params.id}`);
+    console.log(`This is a get operation`);
+  
+    const pelicula = await PeliculaServices.getPeliculaById(req.params.id);
+  
+    return res.status(200).json(pelicula);
+  });
+
+  router.post('', async (req, res) => {
+    console.log(`This is a post operation`);
+  
+    const pelicula = await PeliculaServices.createPelicula(req.body);
+  
+    return res.status(201).json(pelicula);
+  });
+  
 
 
 
-
-getPeliculas = async () => {
-    console.log('This is a function on the service');
-
-    const pool = await sql.connect(config);
-    const response = await pool.request().query(`SELECT * from ${PeliculaoSerie}`);
-    console.log(response);
-
-    return response.recordset;
-}
+export default router;

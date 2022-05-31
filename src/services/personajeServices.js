@@ -3,7 +3,7 @@ import config from '../../db.js'
 import 'dotenv/config'
 
 const Tablapersonaje = process.env.TablapersonajeBd;
-const PeliculaoSerie = process.env.PeliculaoSerieBd;
+
 
 export class personajeService {
 /////////////////////////////////////////////////////////////////////////////////////////CRUD PERSONAJE
@@ -116,16 +116,5 @@ export class personajeService {
         
     };*/
 
-/////////////////////////////////////////////////////////////////////////////////////////CRUD PELICULAS/SERIES
-
-getPeliculas = async () => {
-    console.log('This is a function on the service');
-
-    const pool = await sql.connect(config);
-    const response = await pool.request().query(`SELECT * from ${PeliculaoSerie}`);
-    console.log(response);
-
-    return response.recordset;
-}
 
 }
