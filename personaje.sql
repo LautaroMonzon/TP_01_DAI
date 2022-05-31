@@ -1,13 +1,106 @@
+USE [master]
+GO
+/****** Object:  Database [DAI_personaje]    Script Date: 31/5/2022 08:16:27 ******/
+CREATE DATABASE [DAI_personaje]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'DAI_personaje', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\DAI_personaje.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'DAI_personaje_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\DAI_personaje_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+GO
+ALTER DATABASE [DAI_personaje] SET COMPATIBILITY_LEVEL = 140
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [DAI_personaje].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [DAI_personaje] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [DAI_personaje] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [DAI_personaje] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [DAI_personaje] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [DAI_personaje] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET RECOVERY FULL 
+GO
+ALTER DATABASE [DAI_personaje] SET  MULTI_USER 
+GO
+ALTER DATABASE [DAI_personaje] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [DAI_personaje] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [DAI_personaje] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [DAI_personaje] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [DAI_personaje] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'DAI_personaje', N'ON'
+GO
+ALTER DATABASE [DAI_personaje] SET QUERY_STORE = OFF
+GO
 USE [DAI_personaje]
 GO
-
-/****** Object:  Table [dbo].[Tablapersonaje]    Script Date: 27/4/2022 08:00:32 ******/
+/****** Object:  User [alumno]    Script Date: 31/5/2022 08:16:28 ******/
+CREATE USER [alumno] FOR LOGIN [alumno] WITH DEFAULT_SCHEMA=[dbo]
+GO
+/****** Object:  Table [dbo].[PeliculaoSerie]    Script Date: 31/5/2022 08:16:28 ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
-
+CREATE TABLE [dbo].[PeliculaoSerie](
+	[Id] [int] NULL,
+	[Imagen] [varchar](200) NULL,
+	[Titulo] [varchar](200) NULL,
+	[Fecha de creación] [date] NULL,
+	[Calificación] [int] NULL,
+	[Personajes asociados] [varchar](300) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Tablapersonaje]    Script Date: 31/5/2022 08:16:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 CREATE TABLE [dbo].[Tablapersonaje](
 	[id] [int] NULL,
 	[nombre] [varchar](50) NULL,
@@ -17,5 +110,9 @@ CREATE TABLE [dbo].[Tablapersonaje](
 	[edad] [int] NULL
 ) ON [PRIMARY]
 GO
-
-
+INSERT [dbo].[Tablapersonaje] ([id], [nombre], [peso], [imagen], [historia], [edad]) VALUES (1, N'a', 1, N'a', N'a', 1)
+GO
+USE [master]
+GO
+ALTER DATABASE [DAI_personaje] SET  READ_WRITE 
+GO

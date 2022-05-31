@@ -3,9 +3,10 @@ import config from '../../db.js'
 import 'dotenv/config'
 
 const Tablapersonaje = process.env.TablapersonajeBd;
+const PeliculaoSerie = process.env.PeliculaoSerieBd;
 
 export class personajeService {
-
+/////////////////////////////////////////////////////////////////////////////////////////CRUD PERSONAJE
     getPersonajes = async () => {
         console.log('This is a function on the service');
 
@@ -96,7 +97,7 @@ export class personajeService {
 
 
 //basarse en el get all y desp dentro poner los filtros
-    getPersonajeByFilter = async (nombre, edad, peso) => {
+   /* getPersonajeByFilter = async (nombre, edad, peso) => {
 
         const pool = await sql.connect(config);
         const response = await pool.request()
@@ -113,7 +114,18 @@ export class personajeService {
     getSigned = async() => {
 
         
-    };
+    };*/
 
+/////////////////////////////////////////////////////////////////////////////////////////CRUD PELICULAS/SERIES
+
+getPeliculas = async () => {
+    console.log('This is a function on the service');
+
+    const pool = await sql.connect(config);
+    const response = await pool.request().query(`SELECT * from ${PeliculaoSerie}`);
+    console.log(response);
+
+    return response.recordset;
+}
 
 }

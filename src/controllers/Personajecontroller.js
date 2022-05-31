@@ -61,4 +61,69 @@ router.get('/', async (req, res) => {
 });
 
 
+
+//CRUD PELICULAS/SERIES
+
+router.get('/', async (req, res) => {
+  console.log(`This is a get operation`);
+  const pelicula = await PersonajeServices.getPeliculas();
+  return res.status(200).json(personaje);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export default router;
