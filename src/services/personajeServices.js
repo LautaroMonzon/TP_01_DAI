@@ -95,11 +95,16 @@ export class personajeService {
     }
 
 
-//basarse en el get all y desp dentro poner los filtros
-   getPersonajeByFilter = async (nombre, edad, peso) => {
+/*
+   getPersonajeByFilter = async (nombre, edad, IdPelicula) => {
 
         const pool = await sql.connect(config);
         const response = await pool.request()
+
+        const nombre = req.query.nombre
+        const edad = req.query.edad
+        const IdPelicula = req.query.IdPelicula
+
             .query(`SELECT * from ${Tablapersonaje} where nombre = ${nombre}`)
             .query(`SELECT * from ${Tablapersonaje} where edad = ${edad}`)
             .query(`SELECT * from ${Tablapersonaje} where peso = ${peso}`);
@@ -108,7 +113,7 @@ export class personajeService {
 
         return response.recordset;
     }
-    
+  */  
     //PROXIMAMENTE
     /*getSigned = async() => {
 

@@ -34,7 +34,7 @@ export class peliculaService {
         console.log(pelicula?.fechaDeCreacion)
         console.log(pelicula)
         const response = await pool.request()
-        .input('titulo',sql.NChar, pelicula?.titulo ?? '')
+            .input('titulo',sql.NChar, pelicula?.titulo ?? '')
             .input('Imagen',sql.NChar, pelicula?.Imagen ?? '')
             .input('Fechadecreación',sql.Date, pelicula?.fechaDeCreacion ?? '')
             .input('Calificación',sql.Int, pelicula?.Calificación ?? 0)
