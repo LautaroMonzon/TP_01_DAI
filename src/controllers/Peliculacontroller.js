@@ -28,7 +28,14 @@ router.get('/', async (req, res) => {
     return res.status(201).json(pelicula);
   });
   
-
+  router.delete('/:id', async (req, res) => {
+    console.log(`Request URL Param: ${req.params.id}`);
+    console.log(`This is a delete operation`);
+  
+    const pelicula = await PeliculaServices.deletePeliculaById(req.params.id);
+  
+    return res.status(200).json(pelicula);
+  });
 
 
 export default router;

@@ -10,7 +10,7 @@ export class peliculaService {
         console.log('This is a function on the service');
     
         const pool = await sql.connect(config);
-        const response = await pool.request().query(`SELECT * from ${PeliculaoSerie}`);
+        const response = await pool.request().query(`SELECT id, imagen, titulo, Fechadecreacion from ${PeliculaoSerie}`);
         console.log(response);
     
         return response.recordset;
@@ -29,7 +29,7 @@ export class peliculaService {
     }
     createPelicula = async (pelicula) => {
         console.log('This is a function on the service');
-
+//PROBLEMA CON FECHA DE CREACION
         const pool = await sql.connect(config);
         console.log(pelicula?.fechaDeCreacion)
         console.log(pelicula)
@@ -44,5 +44,18 @@ export class peliculaService {
 
         return response.recordset;
     }
+    deletePeliculaById = async (id) => {
+        console.log('This is a function on the service');
+
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+            .input('id',sql.Int, id)
+            .query(`DELETE FROM ${PeliculaoSerie} WHERE id = @id`);
+        console.log(response)
+
+        return response.recordset;
+    }
+
+
 
 }

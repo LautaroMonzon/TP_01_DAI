@@ -6,12 +6,12 @@ const Tablapersonaje = process.env.TablapersonajeBd;
 
 
 export class personajeService {
-/////////////////////////////////////////////////////////////////////////////////////////CRUD PERSONAJE
+
     getPersonajes = async () => {
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
-        const response = await pool.request().query(`SELECT * from ${Tablapersonaje}`);
+        const response = await pool.request().query(`SELECT Imagen, Nombre, Id from ${Tablapersonaje}`);
         console.log(response);
 
         return response.recordset;
@@ -65,12 +65,12 @@ export class personajeService {
     }
     */
 
-   updatePersonaje = async (personaje) => {
+   updatePersonaje = async (id, personaje) => {
     console.log('This is a function on the service');
 
     const pool = await sql.connect(config);
     const response = await pool.request()
-    .input('id',sql.Int, personaje?.peso ?? 0)
+    .input('id',sql.Int, id)
     .input('nombre',sql.NChar, personaje?.nombre ?? '')
         .input('peso',sql.Int, personaje?.peso ?? 0)
         .input('imagen',sql.NChar, personaje?.imagen ?? '')
@@ -96,7 +96,7 @@ export class personajeService {
 
 
 //basarse en el get all y desp dentro poner los filtros
-   /* getPersonajeByFilter = async (nombre, edad, peso) => {
+   getPersonajeByFilter = async (nombre, edad, peso) => {
 
         const pool = await sql.connect(config);
         const response = await pool.request()
@@ -109,8 +109,8 @@ export class personajeService {
         return response.recordset;
     }
     
-    
-    getSigned = async() => {
+    //PROXIMAMENTE
+    /*getSigned = async() => {
 
         
     };*/

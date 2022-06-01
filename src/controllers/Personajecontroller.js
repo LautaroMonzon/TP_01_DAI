@@ -40,7 +40,7 @@ router.put('/:id', async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a put operation`);
 
-  const personaje = await PersonajeServices.updatePersonaje(req.body);
+  const personaje = await PersonajeServices.updatePersonaje(req.params.id, req.body);
   console.log(req.body);
   return res.status(200).json(personaje);
 });
