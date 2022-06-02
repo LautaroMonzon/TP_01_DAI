@@ -23,7 +23,10 @@ export class personajeService {
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id',sql.Int, id)
-            .query(`SELECT * from ${Tablapersonaje} where id = @id`);
+            .query(`SELECT ${Tablapersonaje}.*, PeliculaoSerie.titulo from ${Tablapersonaje} 
+            INNER JOIN Relacion ON ${Tablapersonaje}.id = relacion.idPersonaje 
+            INNER JOIN PeliculaoSerie ON Relacion.idPeliculaoSerie = PeliculaoSerie.Id 
+            WHERE id = @id`);
         console.log(response)
 
         return response.recordset[0];
