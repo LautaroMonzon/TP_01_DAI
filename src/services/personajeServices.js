@@ -3,7 +3,8 @@ import config from '../../db.js'
 import 'dotenv/config'
 
 const Tablapersonaje = process.env.TablapersonajeBd;
-
+const PeliculaoSerie = process.env.PeliculaoSerieBd;
+const Relacion = process.env.RelacionBd;
 
 export class personajeService {
 
@@ -24,9 +25,17 @@ export class personajeService {
         const response = await pool.request()
             .input('id',sql.Int, id)
             .query(`SELECT * from ${Tablapersonaje} where id = @id`);
-        console.log(response)
 
-        return response.recordset[0];
+            
+        console.log(response)
+        
+        const response2 = await pool.request()
+            .input('id',sql.Int, id)
+            .query(`SELECT PeliculaoSerie.titulo from ${PeliculaoSerie} 
+            INNER JOIN Relacion ON ${PeliculaoSerie}.Id = Relacion.idPelicula
+            WHERE Relacion.idPersonaje = @id`);
+            console.log(response2)
+        return [response.recordset[0], response2.recordset];
     }
 
     createPersonaje = async (personaje) => {
