@@ -1,25 +1,29 @@
 import { Router } from 'express';
 import { personajeService } from '../services/personajeServices.js';
+/*import { Authenticate } from '../common/jwt.strategy.js';*/
 
 const router = Router();
 const PersonajeServices = new personajeService();
 
-router.get('/', async (req, res) => {
+router.get('/', /*Authenticate,*/async (req, res) => {
   console.log(`This is a get operation`);
-  
-  /*let nombre = req.query.nombre ?? '';
-  let edad = req.query.edad ?? '';
-  let peso = req.query.peso ?? '';
-*/
+ 
+  let personaje;
 
+  const nombre = req.query.nombre;
+  const edad = req.query.edad;
+  const peso = req.query.peso;
+  const IdPelicula = req.query.IdPelicula;
 
-  const personaje = await PersonajeServices.getPersonajes();
-  /*personaje = await PersonajeServices.getPersonajesByFilter(nombre,edad,peso);*/
-
+if(nombre || edad || peso || IdPelicula){
+  personaje = await PersonajeServices.getPersonajeByFilter(nombre,edad,peso,IdPelicula);}
+else {
+  personaje = await PersonajeServices.getPersonajes();
+}
   return res.status(200).json(personaje);
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', /*Authenticate,*/async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a get operation`);
 
@@ -28,7 +32,7 @@ router.get('/:id', async (req, res) => {
   return res.status(200).json(personaje);
 });
 
-router.post('', async (req, res) => {
+router.post('', /*Authenticate,*/async (req, res) => {
   console.log(`This is a post operation`);
 
   const personaje = await PersonajeServices.createPersonaje(req.body);
@@ -36,7 +40,7 @@ router.post('', async (req, res) => {
   return res.status(201).json(personaje);
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', /*Authenticate,*/async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a put operation`);
 
@@ -45,19 +49,13 @@ router.put('/:id', async (req, res) => {
   return res.status(200).json(personaje);
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', /*Authenticate,*/async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a delete operation`);
 
   const personaje = await PersonajeServices.deletePersonajeById(req.params.id);
 
   return res.status(200).json(personaje);
-});
-
-router.get('/', async (req, res) => {
-  console.log(`Request URL Param: ${req.params.id}`);
-  console.log(`This is a delete operation`);
-  const personaje = await PersonajeServices.deletePersonajeById(req.params.id);
 });
 
 

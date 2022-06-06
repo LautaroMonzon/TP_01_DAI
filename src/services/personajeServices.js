@@ -18,6 +18,29 @@ export class personajeService {
         return response.recordset;
     }
 
+    getPersonajeByFilter = async (nombre, edad, peso,IdPelicula) => {
+
+        const pool = await sql.connect(config);
+        let filtro;
+        filtro=`SELECT * from ${Tablapersonaje} `;
+        if(nombre){
+            filtro+=`WHERE nombre = @nombre`;
+        }if(edad){
+           filtro+=` WHERE edad = @edad`;
+        }if(peso){
+            filtro+=`  WHERE peso = @peso`;
+        }if(IdPelicula){
+            filtro=`SELECT ${Tablapersonaje}.id,${Tablapersonaje}.nombre,${Tablapersonaje}.imagen from ${Tablapersonaje}  INNER JOIN ${PeliculaoSerie} ON ${Relacion}.idPersonaje=${Tablapersonaje}.id WHERE ${Relacion}.idPelicula = @IdPelicula`;
+            
+        }
+        console.log(filtro)    
+        const response = await pool.request().input('Nombre',sql.NChar, nombre ?? '').input('Edad',sql.Int, edad ?? 0).input('Peso',sql.Int, peso ?? 0).input('IdPelicula',sql.Int, IdPelicula ?? 0).query(filtro)
+            console.log(response)
+
+        return response.recordset;
+    }
+  
+
     getPersonajeById = async (id) => {
         console.log('This is a function on the service');
 
@@ -31,6 +54,8 @@ export class personajeService {
         
         const response2 = await pool.request()
             .input('id',sql.Int, id)
+            
+            
             .query(`SELECT PeliculaoSerie.titulo from ${PeliculaoSerie} 
             INNER JOIN Relacion ON ${PeliculaoSerie}.Id = Relacion.idPelicula
             WHERE Relacion.idPersonaje = @id`);
@@ -54,26 +79,6 @@ export class personajeService {
         return response.recordset;
     }
 
-    /*updatePersonajeById = async (id, personaje) => {
-        console.log('This is a function on the service');
-
-        const pool = await sql.connect(config);
-        const response = await pool.request()
-        console.log(id, personaje)
-          
-            .input('id',sql.Int, id ?? 0)
-            .input('nombre',sql.NChar, personaje?.nombre ?? '')
-            .input('peso',sql.Bit, personaje?.peso ?? false)
-            .input('imagen',sql.NChar, personaje?.imagen ?? '')
-            .input('historia',sql.NChar, personaje?.description ?? '')
-            .input('edad',sql.Bit, personaje?.edad ?? false)
-            .query(`UPDATE Tablapersonaje SET nombre = @nombre, peso = @peso, imagen = @imagen, historia = @historia WHERE id = @id`);
-        console.log(response)
-
-        return response.recordset;
-    }
-    */
-
    updatePersonaje = async (id, personaje) => {
     console.log('This is a function on the service');
 
@@ -85,7 +90,7 @@ export class personajeService {
         .input('imagen',sql.NChar, personaje?.imagen ?? '')
         .input('historia',sql.NChar, personaje?.historia ?? '')
         .input('edad',sql.Int, personaje?.edad ?? 0)
-        .query(`UPDATE Tablapersonaje SET nombre = @nombre, peso = @peso, imagen = @imagen, historia = @historia WHERE id = @id`);
+        .query(`UPDATE Tablapersonaje SET nombre = @nombre, peso = @peso, imagen = @imagen, historia = @historia, edad = @edad WHERE id = @id`);
     console.log(response)
 
     return response.recordset;
@@ -104,30 +109,7 @@ export class personajeService {
     }
 
 
-/*
-   getPersonajeByFilter = async (nombre, edad, IdPelicula) => {
 
-        const pool = await sql.connect(config);
-        const response = await pool.request()
-
-        const nombre = req.query.nombre
-        const edad = req.query.edad
-        const IdPelicula = req.query.IdPelicula
-
-            .query(`SELECT * from ${Tablapersonaje} where nombre = ${nombre}`)
-            .query(`SELECT * from ${Tablapersonaje} where edad = ${edad}`)
-            .query(`SELECT * from ${Tablapersonaje} where peso = ${peso}`);
-
-        console.log(response)
-
-        return response.recordset;
-    }
-  */  
-    //PROXIMAMENTE
-    /*getSigned = async() => {
-
-        
-    };*/
-
+   
 
 }
