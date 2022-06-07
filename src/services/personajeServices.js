@@ -73,7 +73,7 @@ export class personajeService {
             .input('imagen',sql.NChar, personaje?.imagen ?? '')
             .input('historia',sql.NChar, personaje?.historia ?? '')
             .input('edad',sql.Int, personaje?.edad ?? 0)
-            .query(`INSERT INTO ${Tablapersonaje}(id,nombre, peso, imagen, historia, edad) VALUES (@Id,@nombre, @peso, @imagen, @historia, @edad)`);
+            .query(`INSERT INTO ${Tablapersonaje}(nombre, peso, imagen, historia, edad) VALUES (@nombre, @peso, @imagen, @historia, @edad)`);
         console.log(response)
 
         return response.recordset;
