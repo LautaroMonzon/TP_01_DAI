@@ -22,13 +22,13 @@ export class personajeService {
 
         const pool = await sql.connect(config);
         let filtro;
-        filtro=`SELECT * from ${Tablapersonaje} `;
+        
         if(nombre){
-            filtro+=`WHERE nombre = @nombre`;
+           filtro=`SELECT Imagen, Nombre, Id from ${Tablapersonaje}  WHERE nombre = @nombre`; 
         }if(edad){
-           filtro+=` WHERE edad = @edad`;
+           filtro=`SELECT Imagen, Nombre, Idfrom ${Tablapersonaje}  WHERE edad = @edad`;
         }if(peso){
-            filtro+=`  WHERE peso = @peso`;
+            filtro=`SELECT Imagen, Nombre, Id from ${Tablapersonaje}   WHERE peso = @peso`;
         }if(IdPelicula){
             filtro=`SELECT ${Tablapersonaje}.id,${Tablapersonaje}.nombre,${Tablapersonaje}.imagen from ${Tablapersonaje}  INNER JOIN ${PeliculaoSerie} ON ${Relacion}.idPersonaje=${Tablapersonaje}.id WHERE ${Relacion}.idPelicula = @IdPelicula`;
             
