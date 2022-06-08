@@ -30,7 +30,7 @@ export class personajeService {
         }if(peso){
             filtro=`SELECT Imagen, Nombre, Id from ${Tablapersonaje}   WHERE peso = @peso`;
         }if(IdPelicula){
-            filtro=`SELECT ${Tablapersonaje}.id,${Tablapersonaje}.nombre,${Tablapersonaje}.imagen from ${Tablapersonaje}  INNER JOIN ${PeliculaoSerie} ON ${Relacion}.idPersonaje=${Tablapersonaje}.id WHERE ${Relacion}.idPelicula = @IdPelicula`;
+            filtro=`SELECT ${Tablapersonaje}.id,${Tablapersonaje}.nombre,${Tablapersonaje}.imagen from ${Tablapersonaje} INNER JOIN ${Relacion} ON ${Relacion}.idPersonaje=${Tablapersonaje}.id WHERE ${Relacion}.idPelicula = @IdPelicula`;
             
         }
         console.log(filtro)    
